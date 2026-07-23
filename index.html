@@ -258,29 +258,22 @@
         /* PARALLAX BREAK */
         .parallax-break {
             position: relative;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             overflow: hidden;
         }
 
-        .parallax-break .parallax-bg {
-            position: absolute;
-            inset: -20%;
-            background: url('https://sebiboga.github.io/acasainmaramures/images/travelminit-3.jpg') center/cover no-repeat;
-            filter: brightness(0.5);
+        .parallax-break img {
+            width: 100%;
+            display: block;
         }
 
         .parallax-break .parallax-text {
-            position: relative;
-            z-index: 2;
             font-family: 'Playfair Display', serif;
             font-size: clamp(1.3rem, 3.5vw, 2.2rem);
-            color: #fff;
+            color: var(--dark);
             text-align: center;
-            padding: 2rem;
+            padding: 3rem 2rem;
             max-width: 700px;
+            margin: 0 auto;
             line-height: 1.6;
             font-style: italic;
             text-shadow: 0 2px 20px rgba(0,0,0,0.5);
@@ -499,7 +492,7 @@
 
     <!-- PARALLAX BREAK -->
     <section class="parallax-break">
-        <div class="parallax-bg"></div>
+        <img src="https://sebiboga.github.io/acasainmaramures/images/travelminit-3.jpg" alt="Maramureș">
         <div class="parallax-text">
             „Muzica populară nu e doar cântec — e sufletul unui neam care nu se uită."
         </div>
