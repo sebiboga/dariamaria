@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daria Maria — Interpretă de Muzică Populară din Maramureș</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #c8a45a;
+            --dark: #1a1a1a;
+            --cream: #faf6ee;
+            --wine: #6b2d3e;
+            --text: #333;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: var(--text);
+            background: var(--cream);
+            overflow-x: hidden;
+        }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('https://sebiboga.github.io/acasainmaramures/images/travelminit-2.jpg') center/cover no-repeat;
+            filter: brightness(0.55);
+            transform: scale(1.05);
+            animation: slowZoom 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes slowZoom {
+            from { transform: scale(1.05); }
+            to { transform: scale(1.12); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #fff;
+            padding: 2rem;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+        }
+
+        .hero-content .subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content .tagline {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator span {
+            display: block;
+            width: 24px;
+            height: 24px;
+            border-right: 2px solid var(--gold);
+            border-bottom: 2px solid var(--gold);
+            transform: rotate(45deg);
+            opacity: 0.7;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.4s, padding 0.4s;
+        }
+
+        nav.scrolled {
+            background: rgba(26, 26, 26, 0.95);
+            padding: 0.8rem 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .section-divider {
+            width: 60px;
+            height: 2px;
+            background: var(--gold);
+            margin: 0 auto 3rem;
+        }
+
+        /* DESPRE */
+        .despre {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .despre-text p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1.2rem;
+            color: #555;
+        }
+
+        .despre-text .highlight {
+            color: var(--wine);
+            font-weight: 700;
+        }
+
+        .despre-img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        /* VIDEO */
+        .video-section {
+            background: var(--dark);
+            color: #fff;
+            text-align: center;
+        }
+
+        .video-section .section-title {
+            color: #fff;
+        }
+
+        .video-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .video-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .video-card iframe,
+        .video-card video {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: none;
+            background: #000;
+        }
+
+        .video-card p {
+            padding: 1rem;
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        /* PARALLAX BREAK */
+        .parallax-break {
+            position: relative;
+            height: 50vh;
+            min-height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .parallax-break .parallax-bg {
+            position: absolute;
+            inset: -20%;
+            background: url('https://sebiboga.github.io/acasainmaramures/images/travelminit-3.jpg') center/cover no-repeat;
+            filter: brightness(0.5);
+        }
+
+        .parallax-break .parallax-text {
+            position: relative;
+            z-index: 2;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.3rem, 3.5vw, 2.2rem);
+            color: #fff;
+            text-align: center;
+            padding: 2rem;
+            max-width: 700px;
+            line-height: 1.6;
+            font-style: italic;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+        }
+
+        /* EVENIMENTE */
+        .events-list {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .event-item {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #e0d8c8;
+        }
+
+        .event-date {
+            min-width: 70px;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .event-date .day {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--wine);
+            line-height: 1;
+        }
+
+        .event-date .month {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+        }
+
+        .event-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .event-info p {
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        /* GALERIE */
+        .galerie {
+            background: #f0ebe0;
+        }
+
+        .galerie-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .galerie-grid img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 6px;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .galerie-grid img:hover {
+            transform: scale(1.03);
+        }
+
+        /* CONTACT */
+        .contact-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-wrapper p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: #555;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.8rem;
+            border: 2px solid var(--dark);
+            border-radius: 50px;
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            transition: all 0.3s;
+        }
+
+        .contact-links a:hover {
+            background: var(--dark);
+            color: #fff;
+        }
+
+        .phone {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--wine);
+            margin-top: 2rem;
+            display: block;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--dark);
+            color: rgba(255,255,255,0.5);
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.85rem;
+        }
+
+        footer .socials {
+            margin-bottom: 1rem;
+        }
+
+        footer .socials a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            margin: 0 0.8rem;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        footer .socials a:hover {
+            color: var(--gold);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .despre {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .event-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav id="navbar">
+        <a href="#" class="nav-logo">Daria Maria</a>
+        <ul class="nav-links">
+            <li><a href="#despre">Despre</a></li>
+            <li><a href="#muzica">Muzică</a></li>
+            <li><a href="#evenimente">Evenimente</a></li>
+            <li><a href="#galerie">Galerie</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="subtitle">Interpretă de Muzică Populară</div>
+            <h1>Daria Maria</h1>
+            <p class="tagline">„Dorul de Maramureș se cântă, nu se spune."</p>
+        </div>
+        <div class="scroll-indicator"><span></span></div>
+    </section>
+
+    <!-- DESPRE -->
+    <section id="despre">
+        <h2 class="section-title">Despre Mine</h2>
+        <div class="section-divider"></div>
+        <div class="despre">
+            <div class="despre-text">
+                <p>
+                    Născută în <span class="highlight">inima Maramureșului istoric</span>, am crescut ascultând horile și doinele bunicilor mei — cântece care povestesc despre dragoste, dor și lumea satului tradițional.
+                </p>
+                <p>
+                    De-a lungul carierei mele, am urcat pe scene din întreaga țară și din străinătate, purtând cu mândrie <span class="highlight">portul popular maramureșean</span> și cântând cu sufletul despre rădăcinile noastre.
+                </p>
+                <p>
+                    Fiecare melodie pe care o interpretez este o legătură vie cu înaintașii noștri — un dar pe care îl transmit mai departe cu dragoste și respect.
+                </p>
+            </div>
+            <img class="despre-img" src="https://sebiboga.github.io/acasainmaramures/images/travelminit-2.jpg" alt="Daria Maria — port popular maramureșean">
+        </div>
+    </section>
+
+    <!-- MUZICA -->
+    <section id="muzica" class="video-section">
+        <h2 class="section-title">Muzică</h2>
+        <div class="section-divider"></div>
+        <div class="video-grid">
+            <div class="video-card">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Colaj de hori maramureșene" allowfullscreen loading="lazy"></iframe>
+                <p>Colaj de hori maramureșene</p>
+            </div>
+            <div class="video-card">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Doina Maramureșului" allowfullscreen loading="lazy"></iframe>
+                <p>Doina Maramureșului</p>
+            </div>
+            <div class="video-card">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Colind de Crăciun" allowfullscreen loading="lazy"></iframe>
+                <p>Colind de Crăciun</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARALLAX BREAK -->
+    <section class="parallax-break">
+        <div class="parallax-bg"></div>
+        <div class="parallax-text">
+            „Muzica populară nu e doar cântec — e sufletul unui neam care nu se uită."
+        </div>
+    </section>
+
+    <!-- EVENIMENTE -->
+    <section id="evenimente">
+        <h2 class="section-title">Evenimente</h2>
+        <div class="section-divider"></div>
+        <div class="events-list">
+            <div class="event-item">
+                <div class="event-date">
+                    <div class="day">15</div>
+                    <div class="month">Aug</div>
+                </div>
+                <div class="event-info">
+                    <h3>Festivalul Folclorului Maramureșean</h3>
+                    <p>Sighetu Marmației — Orășenii, scena principală</p>
+                </div>
+            </div>
+            <div class="event-item">
+                <div class="event-date">
+                    <div class="day">28</div>
+                    <div class="month">Sep</div>
+                </div>
+                <div class="event-info">
+                    <h3>Seară de Folclor la Sala Radio</h3>
+                    <p>București — Orchestra de Muzică Populară Radio</p>
+                </div>
+            </div>
+            <div class="event-item">
+                <div class="event-date">
+                    <div class="day">20</div>
+                    <div class="month">Dec</div>
+                </div>
+                <div class="event-info">
+                    <h3>Concert de Colinde Tradiționale</h3>
+                    <p>Baia Mare — Centrul Cultural</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERIE -->
+    <section id="galerie" class="galerie">
+        <h2 class="section-title">Galerie</h2>
+        <div class="section-divider"></div>
+        <div class="galerie-grid">
+            <img src="https://sebiboga.github.io/acasainmaramures/images/travelminit-1.jpg" alt="Daria Maria 1">
+            <img src="https://sebiboga.github.io/acasainmaramures/images/travelminit-2.jpg" alt="Daria Maria 2">
+            <img src="https://sebiboga.github.io/acasainmaramures/images/travelminit-3.jpg" alt="Daria Maria 3">
+            <img src="https://sebiboga.github.io/acasainmaramures/images/gal-17.jpg" alt="Daria Maria 4">
+            <img src="https://sebiboga.github.io/acasainmaramures/images/gal-12.jpg" alt="Daria Maria 5">
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <h2 class="section-title">Contact</h2>
+        <div class="section-divider"></div>
+        <div class="contact-wrapper">
+            <p>Pentru colaborări, spectacole sau evenimente private, nu ezitați să mă contactați.</p>
+            <div class="contact-links">
+                <a href="https://facebook.com" target="_blank">Facebook</a>
+                <a href="https://youtube.com" target="_blank">YouTube</a>
+                <a href="https://instagram.com" target="_blank">Instagram</a>
+            </div>
+            <span class="phone">07XX XXX XXX</span>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="socials">
+            <a href="#">Facebook</a>
+            <a href="#">YouTube</a>
+            <a href="#">Instagram</a>
+        </div>
+        <p>&copy; 2026 Daria Maria — Toate drepturile rezervate</p>
+    </footer>
+
+    <!-- JS -->
+    <script>
+        const nav = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 80);
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+
+</body>
+</html>
