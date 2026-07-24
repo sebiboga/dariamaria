@@ -353,7 +353,7 @@
 
         .galerie-grid img {
             width: 100%;
-            height: 250px;
+            height: 480px;
             object-fit: cover;
             border-radius: 6px;
             transition: transform 0.3s;
@@ -465,6 +465,46 @@
                 text-align: center;
             }
         }
+
+        /* LIGHTBOX */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(0,0,0,0.92);
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 4px;
+            box-shadow: 0 0 60px rgba(0,0,0,0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.3s;
+            z-index: 1001;
+        }
+
+        .lightbox-close:hover {
+            color: var(--gold);
+        }
     </style>
 </head>
 <body>
@@ -511,10 +551,7 @@
                     Fiecare melodie pe care o interpretez este o legătură vie cu înaintașii noștri — un dar pe care îl transmit mai departe cu dragoste și respect.
                 </p>
             </div>
-            <video class="despre-video" controls preload="metadata">
-                <source src="media/daria-prezentare.mp4" type="video/mp4">
-                Browser-ul tău nu suportă video.
-            </video>
+            <img class="despre-video" src="images/daria-maria-02.jpeg" alt="Daria Maria">
         </div>
     </section>
 
@@ -549,11 +586,12 @@
         <h2 class="section-title">Galerie</h2>
         <div class="section-divider"></div>
         <div class="galerie-grid">
-            <img src="https://sebiboga.github.io/acasainmaramures/images/travelminit-1.jpg" alt="Daria Maria 1">
-            <img src="https://sebiboga.github.io/acasainmaramures/images/travelminit-2.jpg" alt="Daria Maria 2">
-            <img src="https://sebiboga.github.io/acasainmaramures/images/travelminit-3.jpg" alt="Daria Maria 3">
-            <img src="https://sebiboga.github.io/acasainmaramures/images/gal-17.jpg" alt="Daria Maria 4">
-            <img src="https://sebiboga.github.io/acasainmaramures/images/gal-12.jpg" alt="Daria Maria 5">
+            <img src="images/daria-maria-01.jpeg" alt="Daria Maria 1">
+            <img src="images/daria-maria-02.jpeg" alt="Daria Maria 2">
+            <img src="images/daria-maria-03.jpeg" alt="Daria Maria 3">
+            <img src="https://sebiboga.github.io/acasainmaramures/images/travelminit-2.jpg" alt="Daria Maria 5">
+            <img src="https://sebiboga.github.io/acasainmaramures/images/gal-17.jpg" alt="Daria Maria 7">
+            <img src="https://sebiboga.github.io/acasainmaramures/images/gal-12.jpg" alt="Daria Maria 8">
         </div>
     </section>
 
@@ -586,6 +624,12 @@
         <p>&copy; 2026 Daria Maria — Toate drepturile rezervate</p>
     </footer>
 
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" id="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="">
+    </div>
+
     <!-- JS -->
     <script>
         const nav = document.getElementById('navbar');
@@ -599,6 +643,27 @@
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) target.scrollIntoView({ behavior: 'smooth' });
             });
+        });
+
+        // Lightbox
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.getElementById('lightbox-close');
+
+        document.querySelectorAll('.galerie-grid img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightbox.classList.add('active');
+            });
+        });
+
+        lightboxClose.addEventListener('click', () => lightbox.classList.remove('active'));
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) lightbox.classList.remove('active');
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') lightbox.classList.remove('active');
         });
     </script>
 
