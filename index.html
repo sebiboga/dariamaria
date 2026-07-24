@@ -215,7 +215,12 @@
         /* MUZICA */
         .muzica-section {
             max-width: 900px;
+            min-height: calc(100vh - 80px);
             margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
         }
 
@@ -367,9 +372,22 @@
 
         /* CONTACT */
         .contact-wrapper {
-            max-width: 600px;
+            max-width: 900px;
             margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .contact-text {
             text-align: center;
+        }
+
+        .contact-video {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
         }
 
         .contact-wrapper p {
@@ -464,6 +482,11 @@
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
+            }
+
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
             }
         }
 
@@ -623,9 +646,15 @@
         <h2 class="section-title">Contact</h2>
         <div class="section-divider"></div>
         <div class="contact-wrapper">
-            <p>Pentru colaborări, spectacole sau evenimente private, nu ezitați să mă contactați.</p>
-            <span class="phone">+40 741 122 962</span>
-            <p style="margin-top: 2rem;"><a href="https://sebiboga.github.io/acasainmaramures/" target="_blank" style="color: var(--wine); text-decoration: underline; font-size: 1.1rem;">Acasă în Maramureș</a></p>
+            <div class="contact-text">
+                <p>Pentru colaborări, spectacole sau evenimente private, nu ezitați să mă contactați.</p>
+                <span class="phone">+40 741 122 962</span>
+                <p style="margin-top: 2rem;"><a href="https://sebiboga.github.io/acasainmaramures/" target="_blank" style="color: var(--wine); text-decoration: underline; font-size: 1.1rem;">Acasă în Maramureș</a></p>
+            </div>
+            <video class="contact-video" controls preload="metadata">
+                <source src="media/daria-prezentare.mp4" type="video/mp4">
+                Browser-ul tău nu suportă video.
+            </video>
         </div>
     </section>
 
